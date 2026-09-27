@@ -1,0 +1,309 @@
+<% layout('layouts/boilerplate') -%>
+<script>
+    const maptoken="<%=process.env.MAP_TOKEN%>";
+    const coordinates=<%= JSON.stringify(listing.geometry.coordinates)%>;
+</script>
+
+ <%= msg %>
+
+<div class="container mt-5 mb-5">
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-8 col-md-10">
+
+        <!-- Listing Image -->
+
+        <div class="mb-4">
+
+            <img
+
+                src="<%= listing.image.url %>"
+
+                alt="<%= listing.image.filename %>"
+
+                class="img-fluid rounded-4 shadow-sm"
+
+                style="width: 100%; height: 450px; object-fit: cover;"
+
+            >
+
+        </div>
+
+        <!-- Listing Details -->
+
+        <div>
+
+            <h2 class="fw-bold mb-2">
+
+                <%= listing.title %>
+
+            </h2>
+
+            <p class="text-muted mb-4">
+
+                <%= listing.location %>, <%= listing.country %>
+
+            </p>
+
+            <hr>
+
+            <!-- Description -->
+
+            <h5 class="fw-semibold mt-4">
+
+                About this place
+
+            </h5>
+
+<i>Owned by:<%=listing.owner.username %></i>
+ <!-- <%= JSON.stringify(listing.owner) %> -->
+<br*/* >
+
+            <p class="text-secondary">
+
+                <%= listing.description %>
+
+            </p>
+
+            <!-- Price -->
+
+            <h4 class="fw-bold mt-4">
+
+                ₹<%= listing.price.toLocaleString('en-IN') %>
+
+                <span class="fw-normal fs-6 text-muted">
+
+                    / night
+
+                </span>
+
+            </h4>
+
+            <!-- Buttons show only if curruser=owner -->
+
+<% if(currentUser && listing.owner._id.equals(currentUser._id)) { %>
+
+            <div class="d-flex gap-3 mt-4">
+
+                <a
+
+                    href="/listings/<%= listing._id %>/edit"
+
+                  class="btn btn-secondary"
+
+                    style=" border-color: #343a40; color:white"
+
+                >
+
+                    Edit Listing
+
+                </a>
+
+                <form
+
+                    method="POST"
+
+                    action="/listings/<%= listing._id %>?_method=DELETE"
+
+                >
+
+                    <button
+
+                        type="submit"
+
+                       class="btn btn-danger"
+
+                    >
+
+                        Delete Listing
+
+                    </button>
+
+                </form>
+
+            </div>
+
+            <%}%>
+
+        </div>
+
+        <hr class="my-5">
+
+        <!-- Reviews Section -->
+
+        <div>
+
+<% if(currentUser) {%>
+
+            <h4 class="fw-bold mb-4">
+
+                Leave a Review
+
+            </h4>
+
+            <form
+
+                method="POST"
+
+                action="/listings/<%= listing._id %>/reviews"
+
+                class="needs-validation"
+
+                novalidate
+
+            >
+
+           
+
+ <fieldset class="starability-slot">
+
+  <legend>First rating:</legend>
+
+  <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
+
+  <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+
+  <label for="first-rate1" title="Terrible">1 star</label>
+
+  <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+
+  <label for="first-rate2" title="Not good">2 stars</label>
+
+  <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+
+  <label for="first-rate3" title="Average">3 stars</label>
+
+  <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+
+  <label for="first-rate4" title="Very good">4 stars</label>
+
+  <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+
+  <label for="first-rate5" title="Amazing">5 stars</label>
+
+</fieldset>
+
+                <!-- Comment -->
+
+                <div class="mb-3">
+
+                    <label for="comment" class="form-label">
+
+                        Your Review
+
+                    </label>
+
+                    <textarea
+
+                        class="form-control"
+
+                        id="comment"
+
+                        name="review[comment]"
+
+                        rows="4"
+
+                        placeholder="Share your experience..."
+
+                        required
+
+                    ></textarea>
+
+                    <div class="invalid-feedback">
+
+                        Please write a review.
+
+                    </div>
+
+                </div>
+
+                <!-- Rating -->
+
+               
+                <!-- Submit -->
+
+                <button
+
+                    type="submit"
+
+                    class="btn btn-primary px-4"
+
+                >
+
+                    Submit Review
+
+                </button>
+
+            </form>
+
+        </div>
+
+        <% } %>
+
+        <!-- Existing Reviews -->
+
+      <% if(listing.reviews.length>0) {%>
+
+<div class="row">
+  <h4 class="mb-4">All Reviews</h4>
+    <% for(let review of listing.reviews){ %>
+
+        <div class="col-md-6 mb-3">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <h5 class="card-title">
+
+                       @<%= review.author.username %>
+       <p class="starability-result card-text" data-rating="<%= review.rating %>">
+    Rated:  <%= review.rating %> stars
+  </p>
+                      
+
+                    </h5>
+
+                    <p class="card-text text-muted">
+
+                        <%= review.comment %>
+
+                    </p>
+
+                    <form method="POST"
+
+      action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+
+      class="mt-2">
+
+    <button class="btn btn-sm btn-link text-danger p-0">
+
+        Delete review
+
+    </button>
+
+</form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    <% } %>
+
+</div>
+<%}%>
+
+        <!-- <p><%= listing.reviews.length %> reviews</p> -->
+
+    </div>
+<div class="col-lg-8 col-md-10">
+    <h3>Where you will be</h3>
+    <div id="map"></div>
+</div>
+</div>
+
+</div>
+<script src="/map.js"></script>

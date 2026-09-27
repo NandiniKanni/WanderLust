@@ -1,0 +1,106 @@
+ <% layout('layouts/boilerplate') -%>
+ <style>
+#filters{
+    display:flex;
+    flex-wrap:wrap;
+}
+.filter{
+    margin-right: 2rem;
+    text-align:center;
+    margin-top: 2rem;
+    opacity:0.7
+}
+.filter:hover{
+    opacity:1;
+    cursor:pointer;
+}
+.filter p{
+    font-size:0.8rem;
+}
+ </style>
+ <div id="filters">
+<div class="filter">
+    <div><i class="fa-solid fa-fire"></i></div>
+<p>Trending</p>
+</div>
+<div class="filter">
+    <div><i class="fa-solid fa-bed"></i></div>
+<p>Rooms</p>
+</div>
+<div class="filter">
+    <div><i class="fa-solid fa-mountain-city"></i></div>
+<p>Iconic cities</p>
+</div>
+<div class="filter">
+    <div><i class="fa-solid fa-mountain"></i></div>
+<p>Mountains</p>
+</div>
+<div class="filter">
+    <div><i class="fa-brands fa-fort-awesome"></i></div>
+<p>Castles</p>
+</div>
+<div class="filter">
+    <div><i class="fa-solid fa-person-swimming"></i></div>
+<p>Amazing pools</p>
+</div>
+<div class="filter">
+    <div><i class="fa-solid fa-tents"></i></div>
+<p>Camping</p>
+</div>
+<div class="filter">
+    <div><i class="fa-solid fa-tractor"></i></div>
+<p>Farms</p>
+</div>
+<div class="filter">
+    <div><i class="fa-solid fa-snowflake"></i></div>
+<p>Arctic</p>
+</div>
+ </div>
+ <%= msg %>
+        
+<br>
+<!-- <h1><i>Wanderlust</i></h1> -->
+
+            <!-- <form method="GET" action="/listings/new">
+                    <button>create listings</button>
+                </form> -->
+             
+
+                <div class="row" mt-3>
+            <% for(let listing of listings){%>
+                
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <a href="/listings/<%= listing._id %>" >
+                <div class="card" >
+        <!-- <img src="<%= listing.image.url %>" class="card-img-top" alt="<%= listing.image.filename %>" style="height: 18rem;"  width: 100%;
+                object-fit="cover";
+                border-radius="1rem";
+                box-shadow="0 4px 12px rgba(0,0,0,0.15)";
+                > -->
+                 <img
+            src="<%= listing.image.url %>"
+            class="card-img-top"
+            alt="<%= listing.image.filename %>"
+            style="
+                height: 18rem;
+                width: 100%;
+                object-fit: cover;
+                border-radius: 1rem;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            "
+        >
+        <div class="card-img-overlay"></div>
+        <div class="card-body">
+            
+            <p class="card-text">
+                <h5 class="card-title"><%= listing.title %></h5>
+                &#8377;<%= listing.price.toLocaleString('en-IN') %>/night
+             </p>
+             <!-- <a href="/listings/<%= listing._id %>" class="btn btn-primary">View </a>  -->
+        </div>
+                </div>
+            </a></div>
+            
+                <%}%></div>
+          
+                

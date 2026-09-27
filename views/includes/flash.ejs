@@ -1,0 +1,68 @@
+<!-- 
+<% if (msg && msg.length > 0) { %>
+    <div class="alert alert-info" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <%= msg %>
+
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close">
+        </button>
+    </div>
+<% } %>
+ -->
+<% if (msg && msg.length > 0) { %>
+
+<div class="position-fixed top-0 start-50 translate-middle-x p-3"
+     style="z-index: 1055;">
+
+    <div class="toast show shadow border-0 rounded-3 bg-dark text-white"
+         role="alert"
+         style="min-width: 280px; max-width: 350px;">
+
+        <div class="toast-body d-flex align-items-center justify-content-between">
+
+            <span>
+                <%= msg %>
+            </span>
+
+            <button type="button"
+                    class="btn-close btn-close-white ms-3"
+                    data-bs-dismiss="toast"
+                    aria-label="Close">
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+<% } %>
+<% if (error && error.length > 0) { %>
+
+<div class="position-fixed top-0 start-50 translate-middle-x p-3"
+     style="z-index: 1055;">
+
+    <div class="toast show shadow border-0 rounded-3 bg-dark text-white"
+         role="alert"
+         style="min-width: 280px; max-width: 350px;">
+
+        <div class="toast-body d-flex align-items-center justify-content-between">
+
+            <span>
+                <%= error %>
+            </span>
+
+            <button type="button"
+                    class="btn-close btn-close-white ms-3"
+                    data-bs-dismiss="toast"
+                    aria-label="Close">
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+<% } %>

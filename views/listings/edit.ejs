@@ -1,0 +1,57 @@
+<% layout('layouts/boilerplate') -%>
+<body>
+      
+    <h4> Edit Listing!</h4>
+    <!-- to convert methodpost ofa formto put import package method-override and use it in app.js -->
+   <form method="POST" action="http://localhost:8000/listings/<%= listing._id %>?_method=PUT" enctype="multipart/form-data">
+     <div class="mb-3">
+                <input name="listing[title]" type="text" placeholder="title"
+                    value="<%= listing.title %>" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <input name="listing[description]" type="text" placeholder="description"
+                    value="<%= listing.description %>" class="form-control" required>
+            </div>
+<div class="mb-3">
+    <label class="form-label">Image URL</label>
+    <input
+        name="listing[imageUrl]"
+        type="text"
+        class="form-control"
+        placeholder="Paste new image URL (optional)"
+    >
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Or upload a new image</label>
+    <input
+        name="listing[imageFile]"
+        type="file"
+        class="form-control"
+        accept="image/*"
+    >
+</div>
+            <!-- <div class="mb-3">
+             <label class="form-label" for="image">upload new image</label> -->
+                <!-- <input name="listing[image]"  placeholder="image "
+                     type="file"
+                     class="form-control" />
+            </div> --> 
+
+            <div class="mb-3">
+                <input name="listing[price]" type="number" placeholder="price"
+                    value="<%= listing.price %>" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <input name="listing[location]" type="text" placeholder="location"
+                    value="<%= listing.location %>" class="form-control" required>
+            </div>
+    <div class="mb-4">
+    <input name="listing[country]" type="text" placeholder="country" value="<%= listing.country %>" class="form-control" required >  <br></br> </div>
+    <!-- //<button type="submit">Update Listing</button> -->
+<button type="submit" class="btn btn-danger"> Update Listing </button>
+   </form>
+    
+</body>
