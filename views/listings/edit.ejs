@@ -4,7 +4,7 @@
     <h4> Edit Listing!</h4>
     <!-- to convert methodpost ofa formto put import package method-override and use it in app.js -->
    <!-- <form method="POST" action="http://localhost:8000/listings/<%= listing._id %>?_method=PUT" enctype="multipart/form-data"> -->
-    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" enctype="multipart/form-data"></form>
+  <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" enctype="multipart/form-data">
      <div class="mb-3">
                 <input name="listing[title]" type="text" placeholder="title"
                     value="<%= listing.title %>" class="form-control" required>
